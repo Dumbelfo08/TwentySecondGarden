@@ -719,7 +719,7 @@ class Garden{
 			c.Append("{$0}{$1}/[rc] sent you a {$2}flower/[rc] when they thought about you at {$3}{$4}/[rc]", Palette.PartnerName, partnerName, Palette.Flower, Palette.Date, f.date.ToString());
 			
 			if (f.message != null){
-				c.Append(". The message included with the flower was: {$0}{$1}/[rc]", Palette.FlowerMessage, f.message);
+				c.Append("/[rc]. The message included with the flower was: {$0}{$1}/[rc]", Palette.FlowerMessage, f.message);
 			}
 			writeToConsole(c);
 		}

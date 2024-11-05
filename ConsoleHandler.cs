@@ -6,6 +6,7 @@ class ConsoleHandler{
 	public bool canWrite;
 	
 	private FormatString input;
+	private int inputMinimum;
 	private FormatString prompt;
 	
 	private int consoleWidth;
@@ -114,7 +115,7 @@ class ConsoleHandler{
 				isWriting = false;
 				
 				return;
-			} else if(key.Key == ConsoleKey.Backspace && input.length > 0){
+			} else if(key.Key == ConsoleKey.Backspace && input.length > inputMinimum){
 				// Handle backspace
 				input.DeleteFromEnd(1);
 				
@@ -125,7 +126,7 @@ class ConsoleHandler{
 				} else if(input.length != 0){
 					Console.SetCursorPosition(Console.WindowWidth - 1, Console.CursorTop - 1);
 					Console.Write(" ");
-					Console.SetCursorPosition(Console.WindowWidth - 1, Console.CursorTop - 1);
+					//Console.SetCursorPosition(Console.WindowWidth - 1, Console.CursorTop - 1);
 				}
 			} else if (!char.IsControl(key.KeyChar)){
 				isWriting = true;
@@ -139,6 +140,7 @@ class ConsoleHandler{
 	
 	public void addToInput(FormatString fs){
 		input += fs;
+		inputMinimum += fs.length;
 	}
 	
 	public string askQuestion(FormatString question){
@@ -154,6 +156,7 @@ class ConsoleHandler{
 		this.read(delete, cf);
 		
 		this.isPrompt = false;
+		this.inputMinimum = 0;
 		
 		string s = input.content;
 		
